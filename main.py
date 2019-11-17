@@ -61,3 +61,11 @@ df2.set_index('Date',inplace = True)
 df2['Winner'] = np.where(df2['G-V']>=df2['G-H'], df2['Visitor'], df2['Home'])
 df2.head()
 
+years_list = df1.Season.values
+years = []
+for i in years_list:
+    if i not in years:
+        years.append(i)
+#print(years)
+        
+
