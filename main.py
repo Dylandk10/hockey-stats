@@ -61,11 +61,26 @@ df2.set_index('Date',inplace = True)
 df2['Winner'] = np.where(df2['G-V']>=df2['G-H'], df2['Visitor'], df2['Home'])
 df2.head()
 
-years_list = df1.Season.values
+years_list = df2.Season.values
 years = []
 for i in years_list:
-    if i not in years:
-        years.append(i)
+    if i[:4] not in years:
+        years.append(i[:4])
 #print(years)
         
+team_list = df2.Visitor.values
+teams = []
+for i in team_list:
+    if i not in teams:
+        teams.append(i)
 
+
+year_team_dict = {}
+
+season42 = df2.loc[df2.Season == '1942-1943']
+for i in team_list:
+    if i in season42.Home:
+        year_team_dict[] = i
+
+    
+        
