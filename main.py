@@ -54,7 +54,7 @@ class FileManager:
 def main():
     print("Start up")
     file_handler = OSFileHandler()
-    print(file_handler.get_hockey_data())e
+    print(file_handler.get_hockey_data())
 
 
 if __name__ == "__main__":
@@ -78,9 +78,10 @@ df1 = pd.concat(each_worksheet)
 df2 = df1[['Date','Season','Visitor','Home','G-V','G-H']]
 df2.set_index('Date',inplace = True)
 df2['Winner'] = np.where(df2['G-V']>=df2['G-H'], df2['Visitor'], df2['Home'])
+df2['Season'] = df2['Season'].str[:4]
 df2.head()
 
-<<<<<<< HEAD
+#HEAD
 years_list = df2.Season.values
 years = []
 for i in years_list:
@@ -97,14 +98,22 @@ for i in team_list:
 
 year_team_dict = {}
 
-season42 = df2.loc[df2.Season == '1942-1943']
-for i in team_list:
-    if i in season42.Home:
-        year_team_dict[] = i
+for year in years:
+    season_df = df2.loc[df2.Season == year]
+    existing_teams = []
+    for i in team_list:
+        if i in season_df.Home:
+            if i not in existing_teams:
+                existing_teams.append(i)
+    year_team_dict[year] = existing_teams
+    
+print(year_team_dict)
 
+
+df2.head()
     
         
-=======
+
 G_H = df1.G-H.values
 table_name = df1.Home
 table_season = df1.Season
