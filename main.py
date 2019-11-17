@@ -80,13 +80,19 @@ df2.set_index('Date',inplace = True)
 df2['Winner'] = np.where(df2['G-V']>=df2['G-H'], df2['Visitor'], df2['Home'])
 df2.head()
 
-years_list = df1.Season.values
-years = []
-for i in years_list:
-    if i not in years:
-        years.append(i)
+G_H = df1.G-H.values
+table_name = df1.Home
+table_season = df1.Season
+team_name = "Montreal Candiens"
+for i in G_H:
+    if table_name[i] == team_name and table_season[:4] == 1942:
+        adder = int(i)
+        accumlator = 0
+        accumlator += adder
+print(accumlator)
+
 #print(years)
-        
+
 
 <<<<<<< HEAD
 df1.head()
