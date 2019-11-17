@@ -1,5 +1,6 @@
 import os
 from sys import platform
+import pandas as pd
 
 #to easily access file across systems
 class OSFileHandler:
@@ -25,10 +26,29 @@ class FileManager:
         self.team = team
     #make file path for the hockey team data to sort
     def make_file_for_team(self):
-        if os.path.isfile(file_handler.get_file_path() + year):
+        if os.path.isfile(self.file_handler.get_file_path() + year):
             print("File exist...")
         else:
             os.makedirs(file_handler.get_file_path + years + "/" + team)
+    #write to the so AI can read data
+    def update_team_file(self, goals, win, lost):
+        file = open(self.file_handler.get_file_path + year + "/" + team, "w")
+        file.write("goals: " + goals)
+        file.write("wins : " + wins)
+        file.write("lost : " + lost)
+        file.close()
+    #read the data from file
+    def read_data(self):
+        file = open(self.file_handler.get_file_path + year + "/" + team, "r")
+        goals_line = file.readline().split(" :")
+        win_line = file.readline().split(" :")
+        lost_line = file.readline().split(" :")
+        goal_token = goals_line[1].strip()
+        win_token = win_line[1].strip()
+        lost_token = lost_line[1].strip
+
+        return goal_token, win_token, lost_token
+
 
 def main():
     print("Start up")
@@ -38,3 +58,22 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+nhlfile = pd.ExcelFile('nhlfile.xls')
+
+worksheets = nhlfile.sheet_names[1:]
+
+print('All of the worksheets', worksheets)
+
+each_worksheet = {}
+all_years_df = pd.DataFrame()
+
+for year in worksheets:
+    each_worksheet[year] = pd.read_excel('nhlfile.xls', sheet_name = year)
+
+
+df1 = pd.concat(each_worksheet)
+
+df2 = df1.iloc[]
+
+df1.head()
