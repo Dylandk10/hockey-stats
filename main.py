@@ -33,7 +33,7 @@ class FileManager:
 def main():
     print("Start up")
     file_handler = OSFileHandler()
-    print(file_handler.get_hockey_data())
+    print(file_handler.get_hockey_data())e
 
 
 if __name__ == "__main__":
