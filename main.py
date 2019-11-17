@@ -1,5 +1,6 @@
 import os
 from sys import platform
+import pandas as pd
 
 #to easily access file across systems
 class OSFileHandler:
@@ -38,3 +39,22 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+nhlfile = pd.ExcelFile('nhlfile.xls')
+
+worksheets = nhlfile.sheet_names[1:]
+
+print('All of the worksheets', worksheets)
+
+each_worksheet = {}
+all_years_df = pd.DataFrame()
+
+for year in worksheets:
+    each_worksheet[year] = pd.read_excel('nhlfile.xls', sheet_name = year)
+  
+        
+df1 = pd.concat(each_worksheet)
+
+df2 = df1.iloc[]
+
+df1.head()
