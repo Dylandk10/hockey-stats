@@ -1,6 +1,7 @@
 import os
 from sys import platform
 import pandas as pd
+import numpy as np
 
 #to easily access file across systems
 class OSFileHandler:
@@ -74,6 +75,20 @@ for year in worksheets:
 
 df1 = pd.concat(each_worksheet)
 
-df2 = df1.iloc[]
+df2 = df1[['Date','Season','Visitor','Home','G-V','G-H']]
+df2.set_index('Date',inplace = True)
+df2['Winner'] = np.where(df2['G-V']>=df2['G-H'], df2['Visitor'], df2['Home'])
+df2.head()
 
+years_list = df1.Season.values
+years = []
+for i in years_list:
+    if i not in years:
+        years.append(i)
+#print(years)
+        
+
+<<<<<<< HEAD
 df1.head()
+=======
+>>>>>>> a67dc4db3e1f5fceba4ffa593c1b0df67422d961
